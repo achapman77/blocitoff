@@ -1,5 +1,7 @@
 == README
 
+THIS IS A NEW BRANCH FOR SETUP
+
 ## Blocitoff: a To-do List App to teach the fundamentals of web development and Rails 4.
 
 Made with my mentor at [Bloc](http://bloc.io).
