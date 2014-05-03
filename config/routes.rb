@@ -1,8 +1,12 @@
 Blocitoff::Application.routes.draw do
   devise_for :users
-  get "welcome/index"
-  get "welcome/about"
-  resources :tasks
 
   root to: 'welcome#index'
+
+  get "welcome/index"
+  get "welcome/about"
+  get "welcome/tasks"
+
+  resources :tasks
+
 end

@@ -7,4 +7,6 @@ class User < ActiveRecord::Base
     role == base_role.to_s
   end
 
+  has_many :tasks, dependent: :destroy
+
 end
