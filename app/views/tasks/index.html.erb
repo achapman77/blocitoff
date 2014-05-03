@@ -1,0 +1,32 @@
+<h1>Task List</h1>
+
+<table class = "table table-bordered table-hover">
+  <thead>
+    <tr>
+      <th>Description</th>
+      <th>Time Left</th>
+      <th>Completed?</th>
+      <th>Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @tasks.each do |task| %>
+      <tr>
+        <td><%= task.description %></td>
+        <td>Days Left</td>
+        <td>Complete</td>
+        <td>Delete</td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<div>
+  <h4> Add Task to List</h4>
+    <%= form_for @task do |f| %>
+    <%= f.label :description %>
+    <%= f.text_field :description %>
+
+    <%= f.submit "Add to List", class: 'btn btn-primary'%>
+  <% end %>
+</div>
