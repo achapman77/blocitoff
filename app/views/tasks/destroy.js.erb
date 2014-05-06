@@ -1,0 +1,5 @@
+<% if @task.destroyed? %>
+  $('#task-' +<%= @task.id %>).hide();
+<% else %>
+  $('#task-' +<%= @task.id %>).prepend("<div class='alert alert-error'><%= flash[:error] %></div>");
+<% end %>

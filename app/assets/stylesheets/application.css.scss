@@ -1,4 +1,5 @@
 @import "bootstrap";
+@import "bootstrap3-switch";
 
 .user-info {
   margin-top: 9px;
@@ -30,4 +31,22 @@ h3 {
 .btn-group {
   border-radius: 0px;
   border-radius: 4px;
+}
+
+.TimeLeft-Column {
+  width: 100px;
+  text-align: center;
+}
+
+.Completed-Column {
+  width: 75px;
+  text-align: center;
+}
+
+.red {
+  color: #CC0000;
+}
+
+.green {
+  color: #29A629;
 }
