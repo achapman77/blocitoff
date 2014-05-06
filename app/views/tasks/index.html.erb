@@ -15,25 +15,26 @@
         <td><%= task.description %></td>
         <td align="center"><%= task.days_left %></td>
         <td align="center">
-          <i class="glyphicon glyphicon-ok-sign green", onclick="myFunction()"></i>
+          <i class="glyphicon glyphicon-ok-sign blue", onclick="myFunction()"></i>
           <i class="glyphicon glyphicon-exclamation-sign red", onclick="myFunction()"></i>
-        </td>>
+        </td>
         <td align="center">
           <%= link_to '<i class="glyphicon glyphicon-remove red"></i>'.html_safe, task,  method: :delete, remote: true %>
         </td>
       </tr>
     <% end %>
+        <td class = "newtaskbackground">
+          <%= form_for @task do |f| %>
+            <%= f.text_field :description, class: 'newtask' %>
+        </td>
+        <td class = "newtaskbackground">
+          <span>
+            <%= f.submit "Add Task", class: 'btn btn-primary'%>
+            <% end %>
+          </span>
+        </td>
   </tbody>
 </table>
 
-<div>
-  <h4> Add Task to List</h4>
-    <%= form_for @task do |f| %>
-    <%= f.label :description %>
-    <%= f.text_field :description %>
 
-    <%= f.submit "Save", class: 'btn btn-primary'%>
-  <% end %>
-</div>
 
-exclamation-sign
