@@ -2,12 +2,14 @@ class TasksController < ApplicationController
   respond_to :html, :js
 
   def index
-    @tasks = Task.all
     @task = Task.new
+    @tasks = Task.all
+    authorize @task
   end
 
   def new
     @task = Task.new
+    authorize @task
   end
 
   def show
@@ -16,6 +18,7 @@ class TasksController < ApplicationController
 
   def create
     @task = Task.create(task_params)
+    authorize @task
 
     if @task.save
     flash[:notice] = "Hooray! Task was saved."
@@ -30,6 +33,7 @@ class TasksController < ApplicationController
 
   def update
     @task = Task.find(params[:id])
+    authorize @task
 
     if @task.update_attributes(:done, true)
       flash[:notice] = "Task completed."
@@ -42,6 +46,7 @@ class TasksController < ApplicationController
 
   def destroy
     @task = Task.find(params[:id])
+    authorize @task
 
     if @task.destroy
       flash[:notice] = "Task was removed."

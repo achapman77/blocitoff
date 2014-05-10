@@ -66,3 +66,12 @@ h3 {
 newtaskbackground:hover {
   background-color: whitesmoke;
 }
+
+.task_table {
+  position: relative;
+}
+
+#bottom_link {
+  postion: absolute;
+  bottom: 0px
+}

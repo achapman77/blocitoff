@@ -1,38 +1,40 @@
 <h1>Task List</h1>
-
-<table class = "table table-bordered table-hover">
-  <thead>
-    <tr>
-      <th>Description</th>
-      <th class = "TimeLeft-Column">Time Left</th>
-      <th class = "Completed-Column">Done?</th>
-      <th class = "Completed-Column">Delete?</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @tasks.each do |task| %>
-      <tr id='<%= "task-#{task.id}" %>'>
-        <td><%= task.description %></td>
-        <td align="center"><%= task.days_left %></td>
-        <td align="center">
-          <i class="glyphicon glyphicon-ok-sign blue" id="<%= "#{task.id}" %>"></i>
-          <i class="glyphicon glyphicon-exclamation-sign red" id="<%= "exclamation-sign-#{task.id}" %>"></i>
-        </td>
-        <td align="center">
-          <%= link_to '<i class="glyphicon glyphicon-remove red"></i>'.html_safe, task,  method: :delete, remote: true %>
-        </td>
+  <table class = "table table-bordered table-hover">
+    <thead>
+      <tr>
+        <th>Description</th>
+        <th class = "TimeLeft-Column">Time Left</th>
+        <th class = "Completed-Column">Done?</th>
+        <th class = "Completed-Column">Delete?</th>
       </tr>
-    <% end %>
-        <%= form_for @task do |f| %>
-        <td class = "newtaskbackground">
-          <%= f.text_field :description, class: 'newtask' %>
-        </td>
-        <td class = "newtaskbackground">
-            <%= f.submit "Add Task", class: 'btn btn-primary'%>
-        </td>
-        <% end %>
-  </tbody>
-</table>
-
-
-
+    </thead>
+    <tbody>
+      <% @tasks.each do |task| %>
+        <tr id='<%= "task-#{task.id}" %>'>
+          <td><%= task.description %></td>
+          <td align="center"><%= task.days_left %></td>
+          <td align="center">
+            <i class="glyphicon glyphicon-ok-sign blue" id="<%= "#{task.id}" %>"></i>
+            <i class="glyphicon glyphicon-exclamation-sign red" id="<%= "exclamation-sign-#{task.id}" %>"></i>
+          </td>
+          <td align="center">
+            <%= link_to '<i class="glyphicon glyphicon-remove red"></i>'.html_safe, task,  method: :delete, remote: true %>
+          </td>
+        </tr>
+      <% end %>
+          <% if policy(Task.new).create? %>
+            <%= form_for @task do |f| %>
+            <td class = "newtaskbackground">
+              <%= f.text_field :description, class: 'newtask' %>
+            </td>
+            <td class = "newtaskbackground">
+                <%= f.submit "Add Task", class: 'btn btn-primary'%>
+            </td>
+            <% end %>
+          <td>
+          <% else %>
+                <%= link_to "Sign Up To Add Tasks!", new_user_registration_path, class: 'btn btn-signup' %>
+                <% end %>
+          </td>
+    </tbody>
+  </table>
