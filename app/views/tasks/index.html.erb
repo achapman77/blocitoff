@@ -23,7 +23,7 @@
         </td>
       </tr>
     <% end %>
-        <%= form_for @task, remote: true do |f| %>
+        <%= form_for @task do |f| %>
         <td class = "newtaskbackground">
           <%= f.text_field :description, class: 'newtask' %>
         </td>
