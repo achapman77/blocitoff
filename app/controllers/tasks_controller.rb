@@ -18,11 +18,13 @@ class TasksController < ApplicationController
     @task = Task.create(task_params)
 
     if @task.save
-    flash[:notice] = "Task was saved."
-    redirect_to :back
+    flash[:notice] = "Hooray! Task was saved."
     else
-    flash[:error] = "There was an error saving the task. Please try again."
-    redirect_to :back
+    flash[:error] = "Ooops!  Task wasn't saved."
+    end
+
+    respond_with(@task) do |f|
+      f.html { redirect_to tasks_path }
     end
   end
 
