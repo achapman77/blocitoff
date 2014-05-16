@@ -1,0 +1,3 @@
+<% if @task.completed? %>
+  $('#completed-' +'<%= @task.id %>').replaceWith( '<td align="center"><i class="glyphicon glyphicon-ok-sign blue" ></i></td>');
+<% end %>

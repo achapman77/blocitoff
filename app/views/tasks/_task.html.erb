@@ -1,0 +1,19 @@
+<tr id='<%= "task-#{task.id}" %>'>
+  <td><%= task.description %></td>
+  <td align="center">
+    <%= task.days_left %>
+  </td>
+  <td id='<%= "completed-#{task.id}" %>' align="center">
+    <% if task.completed %>
+    <i class="glyphicon glyphicon-ok-sign blue" ></i>
+    <% else %>
+    <%= link_to '<i class="glyphicon glyphicon-exclamation-sign red"></i>'.html_safe, completed_task_path(task.id), method: :post, remote: true %>
+    <% end %>
+  </td>
+  <td align="center">
+    <%= link_to '<i class="glyphicon glyphicon-remove red"></i>'.html_safe, task,  method: :delete, remote: true %>
+  </td>
+  <td>
+    <%= task.user.name %>
+  </td>
+</tr>

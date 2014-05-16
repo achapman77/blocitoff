@@ -18,6 +18,8 @@ class TasksController < ApplicationController
 
   def create
     @task = current_user.tasks.create(task_params)
+    #@task = Task.new
+
     authorize @task
 
     if @task.save
@@ -32,15 +34,7 @@ class TasksController < ApplicationController
   end
 
   def update
-    @task = current_user.tasks.find(params[:id])
-    authorize @task
-
-    if @task.update_attributes(:done, true)
-      flash[:notice] = "Task completed."
-      redirect_to task_index_path, :notice => "Task marked as done."
-    else
-      redirect_to task_index_path, :error => "Unable to mark task as done."
-    end
+    #Use to edit tasks
   end
 
 
@@ -69,10 +63,11 @@ class TasksController < ApplicationController
     else
       flash[:error] = "There was an error completing the task."
     end
-    redirect_to tasks_path
-    #respond_with(@task) do |f|
-     # f.html { redirect_to tasks_path }
-    #end
+    #redirect_to tasks_path
+
+    respond_with(@task) do |f|
+      f.html { redirect_to tasks_path }
+    end
   end
 
   private

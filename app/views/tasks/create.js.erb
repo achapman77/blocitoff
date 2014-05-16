@@ -1,6 +1,4 @@
 <% if @task.valid? %>
-  $('#task').prepend("<%= escape_javascript(render(@task)) %>");
-  $(".new_task").replaceWith("<%= escape_javascript(render partial: 'tasks/form', locals: { task: @new_task }) %>");
-<% else %>
-  $('.new_task').replaceWith("<%= escape_javascript(render partial: 'tasks/form', locals: { task: @task }) %>");
+  $('#task-table tr:last').before("<%= escape_javascript(render(@task)) %>");
 <% end %>
+$("#newtaskfield").val("")
