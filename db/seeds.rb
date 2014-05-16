@@ -9,17 +9,26 @@ require 'faker'
     )
   user.skip_confirmation!
   user.save
-end
+
 users = User.all
 
-#Creating Tasks
-20.times do
-  Task.create(
-    description:  Faker::Lorem.sentence)
+  #Creating Tasks
+  5.times do
+    user.tasks.create(
+      description:  Faker::Lorem.sentence)
+  end
 end
 
 tasks = Task.all
 
+user = User.new(
+    name:   "admin",
+    email:  "admin@example.com",
+    password: "helloworld",
+    role: "admin"
+    )
+  user.skip_confirmation!
+  user.save
 
 puts "Seed finished"
 puts "#{User.count} users created"

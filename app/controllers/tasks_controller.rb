@@ -8,7 +8,7 @@ class TasksController < ApplicationController
   end
 
   def new
-    @task = Task.new
+    @task = current_user.tasks.new
     authorize @task
   end
 
@@ -17,7 +17,7 @@ class TasksController < ApplicationController
   end
 
   def create
-    @task = Task.create(task_params)
+    @task = current_user.tasks.create(task_params)
     authorize @task
 
     if @task.save
@@ -32,7 +32,7 @@ class TasksController < ApplicationController
   end
 
   def update
-    @task = Task.find(params[:id])
+    @task = current_user.tasks.find(params[:id])
     authorize @task
 
     if @task.update_attributes(:done, true)
@@ -57,6 +57,22 @@ class TasksController < ApplicationController
     respond_with(@task) do |f|
       f.html { redirect_to tasks_path }
     end
+  end
+
+  def completed
+    @task = Task.find(params[:id])
+    #authorize @task
+    @task.completed = true
+
+    if @task.save
+      flash[:notice] = "Task was completed."
+    else
+      flash[:error] = "There was an error completing the task."
+    end
+    redirect_to tasks_path
+    #respond_with(@task) do |f|
+     # f.html { redirect_to tasks_path }
+    #end
   end
 
   private

@@ -4,6 +4,8 @@ Blocitoff::Application.routes.draw do
 
   resources :tasks
 
+  post 'tasks/completed/:id' => 'tasks#completed', :as => :completed_task
+
   get 'about' => 'welcome#about'
 
   root to: 'welcome#index'

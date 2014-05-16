@@ -1,40 +1,59 @@
-<h1>Task List</h1>
-  <table class = "table table-bordered table-hover">
-    <thead>
-      <tr>
-        <th>Description</th>
-        <th class = "TimeLeft-Column">Time Left</th>
-        <th class = "Completed-Column">Done?</th>
-        <th class = "Completed-Column">Delete?</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @tasks.each do |task| %>
-        <tr id='<%= "task-#{task.id}" %>'>
-          <td><%= task.description %></td>
-          <td align="center"><%= task.days_left %></td>
-          <td align="center">
-            <i class="glyphicon glyphicon-ok-sign blue" id="<%= "#{task.id}" %>"></i>
-            <i class="glyphicon glyphicon-exclamation-sign red" id="<%= "exclamation-sign-#{task.id}" %>"></i>
-          </td>
-          <td align="center">
-            <%= link_to '<i class="glyphicon glyphicon-remove red"></i>'.html_safe, task,  method: :delete, remote: true %>
-          </td>
+
+  <h1>Task List</h1>
+    <table class = "table table-bordered table-hover">
+      <thead>
+        <tr>
+          <th>Description</th>
+          <th class = "TimeLeft-Column">Time Left</th>
+          <th class = "Completed-Column">Done?</th>
+          <th class = "Completed-Column">Delete?</th>
+          <th>Created by</th>
         </tr>
-      <% end %>
-          <% if policy(Task.new).create? %>
-            <%= form_for @task do |f| %>
+      </thead>
+      <tbody>
+        <% @tasks.each do |task| %>
+          <tr id='<%= "task-#{task.id}" %>'>
+            <td><%= task.description %></td>
+            <td align="center">
+              <%= task.days_left %>
+            </td>
+            <td align="center">
+              <% if task.completed %>
+              <i class="glyphicon glyphicon-ok-sign blue" ></i>
+              <% else %>
+              <%= link_to '<i class="glyphicon glyphicon-exclamation-sign red"></i>'.html_safe, completed_task_path(task.id), method: :post %>
+              <% end %>
+            </td>
+            <td align="center">
+              <%= link_to '<i class="glyphicon glyphicon-remove red"></i>'.html_safe, task,  method: :delete, remote: true %>
+            </td>
+            <td>
+              <%= task.user.name %>
+            </td>
+          </tr>
+        <% end %>
+        <% if policy(Task.new).create? %>
+          <%= form_for @task do |f| %>
             <td class = "newtaskbackground">
-              <%= f.text_field :description, class: 'newtask' %>
+              <%= f.text_field :description, class: 'newtask', placeholder: "Add New Tasks Here" %>
             </td>
             <td class = "newtaskbackground">
-                <%= f.submit "Add Task", class: 'btn btn-primary'%>
+              <%= f.submit "Add Task", class: 'btn btn-primary'%>
             </td>
-            <% end %>
-          <td>
-          <% else %>
-                <%= link_to "Sign Up To Add Tasks!", new_user_registration_path, class: 'btn btn-signup' %>
-                <% end %>
-          </td>
-    </tbody>
-  </table>
+          <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <div class="jumbotron">
+      <div class="btn-group btn-group-justified">
+        <div class="btn-group">
+          <%= link_to "Sign In To Start Creating Tasks", new_user_session_path, class: 'btn btn-primary' %>
+        </div>
+      <div class="btn-group">
+        <h3>Or</h3>
+      </div>
+      <div class="btn-group">
+        <%= link_to "Sign Up Today!", new_user_registration_path, class: 'btn btn-signup' %>
+      </div>
+    </div>
+  <% end %>
