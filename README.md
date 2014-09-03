@@ -12,4 +12,4 @@ Devise, SendGrid, Rake, and Whenever (w/cron jobs).
 Twitter Bootstrap 3
 
 ## Languages:
-#Ruby on Rails, #HTML5, #CSS3, #SASS, #Coffeescript
+`Ruby on Rails`, `HTML5`, `CSS3`, `SASS`, `Coffeescript`
